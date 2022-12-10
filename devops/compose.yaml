@@ -1,0 +1,41 @@
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=adraba
+      - MYSQL_DATABASE=noder_neder
+
+    volumes:
+      - /Users/sagilevi/Desktop/dbscheme/data:/var/lib/mysql
+      - /Users/sagilevi/Desktop/dbscheme/init:/docker-entrypoint-initdb.d/:ro
+
+
+###where /home/user.. is a shared folder on the host
+  #
+  #And in the /home/user/db/mysql/init folder .. just drop one sql file, with any name, for example init.sql containing :
+  #
+  #CREATE DATABASE mydb;
+  #GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%' IDENTIFIED BY 'mysql';
+  #GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'localhost' IDENTIFIED BY 'mysql';
+  #USE mydb
+  #CREATE TABLE CONTACTS (
+  #    [ ... ]
+  #);
+  #INSERT INTO CONTACTS VALUES ...
+  #[ ... ]
+  #According to the official mysql documentation, you can put more than one sql file in the docker-entrypoint-initdb.d, they are executed in the alphabetical order
+
+
+
+
+
+
+
+#  pipe:
+#    image: adraba_pipe:latest
+#    restar: always
+#    ports:
+#      - "1942:1942"
